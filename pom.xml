@@ -5,6 +5,8 @@
 	<groupId>com.nsc</groupId>
 	<artifactId>computer-fundamentals</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
 	<name>computer-fundamentals</name>
 	<description>computer-fundamentals project</description>
 
