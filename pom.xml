@@ -8,4 +8,8 @@
 	<name>computer-fundamentals</name>
 	<description>computer-fundamentals project</description>
 
+	<modules>
+		<module>design-pattern</module>
+	</modules>
+
 </project>
