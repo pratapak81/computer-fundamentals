@@ -1,0 +1,37 @@
+class Employee {
+    private String firstName;
+    private String lastName;
+    private String monthlyIncome;
+    private String nbHoursPerWeek;
+
+    // getters and setters
+
+    // save method should not be here, it should in persistence layer
+    public static void save(Employee employee) {
+        try {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("### EMPLOYEE RECORD ####");
+                    sb.append(System.lineSeparator());
+                    sb.append("NAME: ");
+                    sb.append(employee.firstName + " " + employee.lastName);
+                    sb.append(System.lineSeparator());
+                    sb.append("POSITION: ");
+                    sb.append(employee.getClass().getTypeName());
+                    sb.append(System.lineSeparator());
+                    sb.append("EMAIL: ");
+                    sb.append(employee.getEmail());
+                    sb.append(System.lineSeparator());
+                    sb.append("MONTHLY WAGE: ");
+                    sb.append(employee.monthlyIncome);
+                    sb.append(System.lineSeparator()); // serialization is 1 responsibility
+
+                    Path path = Paths.get(employee.getFullName()
+                            .replace(" ","_") + ".rec");
+                    Files.write(path, sb.toString().getBytes()); // file access as another responsibility
+
+                    System.out.println("Saved employee " + employee.toString());
+                } catch (IOException e){
+                    System.out.println("ERROR: Could not save employee. " + e); // logging is one more responsibility
+                } // exception handling is another responsibility
+    }
+}

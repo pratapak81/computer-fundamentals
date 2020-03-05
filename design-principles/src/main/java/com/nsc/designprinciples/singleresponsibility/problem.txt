@@ -1,0 +1,51 @@
+Problem 1:
+if (employee.getMonthlyIncome() > 2000) {
+    // some logic here
+} else {
+    // some other logic here
+}
+
+Solution: extract logic of if block and else block to different method or class
+
+Problem 2:
+Income getIncome(Employee e) {
+
+    Income income = employeeRepository.getIncome(e.id); // responsibility 1
+
+    StateAuthorityApi.send(income, e.fullName);
+
+    Payslip payslip = PayslipGenerator.get(income); // responsibility 2
+
+    JsonObject payslipJson = convertToJson(payslip); // responsibility 3
+
+    EmailService.send(e.email, payslipJson); // responsibility 4
+
+    ...
+
+    return income;
+}
+
+Problem 3: below class has many responsibility
+class Utils {
+    void saveToDB(Object o) {...} // responsibility 1
+    void convertToJson(Object o) {...} // responsibility 1
+
+    byte[] serialize(Object o) {...} // responsibility 2
+
+    void log(String msg) {...} // responsibility 3
+
+    String toFriendlyDate(LocalDateTime date) {...} // responsibility 4
+
+    int roundDoubleToInt(double val) {...} // responsibility 5
+}
+
+/************************************************************************************/
+
+Example of Single Responsibility Principle (SRP)
+class ConsoleLogger {
+    void logInfo(String message) {
+        System.out.println(message);
+    }
+
+    void logError(String message, Exception e) {...}
+}
