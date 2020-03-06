@@ -1,6 +1,6 @@
 package com.nsc.designprinciples.singleresponsibility;
 
-public class Employee {
+public abstract class Employee {
     private String firstName;
     private String lastName;
     private String email;
@@ -53,4 +53,6 @@ public class Employee {
     public void setNbHoursPerWeek(double nbHoursPerWeek) {
         this.nbHoursPerWeek = nbHoursPerWeek;
     }
+
+    public abstract void requestTimeOff(int days, Employee manager);
 }

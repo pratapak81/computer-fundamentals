@@ -1,0 +1,81 @@
+class Bird {
+    public void fly(int altitude) {...}
+}
+
+class Ostrich extends Bird {
+    @Override
+    public void fly(int altitude) {
+        // Do nothing; An Ostrich can't fly
+    }
+}
+
+Bird ostrich = new Ostrich();
+ostrich.fly(1000); // incorrect behaviour
+
+Hence class Bird is not fully substitutable by Ostrich
+
+Solution: by breaking relationship
+class Bird {
+    public void fly(int altitude) {...}
+}
+
+class Ostrich  {
+   // no need to implement fly method
+}
+
+/************* type checking *****************/
+for (Task t: tasks) {
+    if (t instance of BugFix) {
+        BugFix bf = (BugFix)t;
+        bf.initializeBugDescription();
+    }
+    t.setInProgress();
+}
+
+Solution:
+class BugFix extends Task {
+    @Override
+    public void setInProgress() {
+        this.initializeBugDescription();
+        super.setInProgress();
+    }
+}
+
+for (Task t: tasks) {
+    t.setInProgress();
+}
+
+/**********************************************************************************/
+Subcontractor can't request for time off and also no need to calculate taxes for Subcontractor
+public class Subcontractor extends Employee {
+
+    public Subcontractor(String fullName, int monthlyIncome) {
+        super(fullName, monthlyIncome);
+    }
+
+    @Override
+    public void requestTimeOff(int nbDays, Employee manager) {
+        throw new RuntimeException("Not implemented"); // violation of Liskov Substitution Principle
+    }
+
+    public boolean approveSLA(ServiceLicenseAgreement sla) {
+        /*
+        Business logic for approving a
+        service license agreement for a
+        for a subcontractor
+         */
+        boolean result = false;
+        if (sla.getMinUptimePercent() >= 98
+                && sla.getProblemResolutionTimeDays() <= 2) {
+            result=  true;
+        }
+
+        System.out.println("SLA approval for " + this.getFullName() + ": " + result);
+        return result;
+    }
+}
+
+Solution: break the relationship
+public class Subcontractor {
+    public boolean approveSLA(ServiceLicenseAgreement sla) {...}
+}

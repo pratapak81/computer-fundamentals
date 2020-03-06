@@ -1,5 +1,7 @@
 package com.nsc.designprinciples.singleresponsibility.persistence;
 
+import com.nsc.designprinciples.openclosed.FullTimeEmployee;
+import com.nsc.designprinciples.openclosed.PartTimeEmployee;
 import com.nsc.designprinciples.singleresponsibility.Employee;
 
 import java.io.IOException;
@@ -19,8 +21,8 @@ public class EmployeeRepository {
     }
 
     public List<Employee> findAll() {
-        Employee pratap = new Employee("Pratap", "AK", 2000, 12);
-        Employee mahesh = new Employee("Mahesh", "NK", 1000, 15);
+        Employee pratap = new FullTimeEmployee("Pratap", "AK", 2000, 12);
+        Employee mahesh = new PartTimeEmployee("Mahesh", "NK", 1000, 15);
         return Arrays.asList(pratap, mahesh);
     }
 
