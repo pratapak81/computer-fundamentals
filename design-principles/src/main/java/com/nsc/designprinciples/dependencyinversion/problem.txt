@@ -1,0 +1,80 @@
+Low level class
+class SqlProductRepo {
+    public Product getById(String productId) {...}
+}
+
+High level class
+class PaymentProcessor {
+    public void pay(String productId) {
+        SqlProductRepo repo = new SqlProductRepo(); // tight coupling
+        Product product = repo.getById(productId);
+        this.processPayment(product);
+    }
+}
+
+Solution:
+interface ProductRepo {
+    Product getById(String productId);
+}
+
+class SqlProductRepo implements ProductRepo {
+    @Override
+    Product getById(String productId) {...}
+}
+
+class MongoProductRepo implements ProductRepo {
+    @Override
+    Product getById(String productId) {...}
+}
+
+class PaymentProcessor {
+    public void pay(String productId) {
+        // interface - depending on abstraction instead of concrete class
+        ProductRepo repo = ProductRepoFactory.getInstance(this.type); // eliminated coupling but still have coupling with ProductRepo
+        Product product = repo.getById(productId);
+        this.processPayment(product);
+    }
+}
+
+Better Solution is to provide ProductRepo concrete object through Dependency Injection
+class PaymentProcessor {
+    private ProductRepo repo;
+
+    PaymentProcessor(ProductRepo repo) {
+        this.repo = repo;
+    }
+
+    public void pay(String productId) {
+        Product product = this.repo.getById(productId);
+        this.processPayment(product);
+    }
+}
+
+/***********************************************************************/
+A a = new A();
+B b = new B();
+C c = new C(a); // C depends on A
+D d = new D(b); // S depends on B
+E e = new E(c, d); // E depends on both C and D
+e.something();
+
+Solution: use Inversion of Control (IOC)
+@Configuration
+public class DependencyConfig {
+    @Bean
+    public A a() { return new A(); }
+    @Bean
+    public B a() { return new B(); }
+    @Bean
+    public C a(A a, B b) { return new C(a, b); }
+}
+
+class C {
+    private A a;
+    private B b;
+
+    C(A a, B b) {
+        this.a = a;
+        this.b = b;
+    }
+}
