@@ -1,0 +1,55 @@
+Problem 1:
+interface LoginService {
+    void signIn();
+    void signOut();
+    void updateRememberMeCookie();
+    void getUserDetails();
+    void setSessionExpiration(int seconds);
+    void validateToken(Jwt token);
+}
+
+class GoogleLoginService implements LoginService {
+    void updateRememberMeCookie() {
+        throw new UnsupportedOperationException(); // violates ISP and LSP
+    }
+
+    void setSessionExpiration(int seconds) {
+        throw new UnsupportedOperationException(); // violates ISP and LSP
+    }
+}
+
+/******** interfaces with low cohesion **********/
+interface ShoppingCart { // unrelated features
+    void addItem(Item item);
+    void removeItem(Item item);
+    void processPayment();
+    bool checkItemInStock(Item item);
+}
+
+// although this class doesn't violates ISP, it violates SRP
+class ShoppingCartImpl implements ShoppingCart {
+    void processPayment() {
+        PaymentService ps = new PaymentService();
+        ps.pay(this.totalAmount);
+        User user = UserService.getUserFromTransaction();
+        EmailService emailService = new EmailService();
+        emailService.notify(user);
+    }
+}
+
+/***************** Payslip Generation Feature *********************/
+interface ExportableDocument {
+    byte[] toPdf();
+    String toJson();
+    String toText();
+}
+
+// if the requirement is to only generate Text document
+public class PaySlip implements ExportableDocument {
+    @Override
+    String toText() {...};
+    @Override
+    String toJson() { throw new UnSupportedOperationException(); }; // violates ISP
+    @Override
+    byte[] toPdf()() { throw new UnSupportedOperationException(); }; // violates ISP
+}

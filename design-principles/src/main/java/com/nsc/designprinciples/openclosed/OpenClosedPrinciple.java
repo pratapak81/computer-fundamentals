@@ -18,8 +18,6 @@ import com.nsc.designprinciples.singleresponsibility.Employee;
  * 1. Best way to apply OCP is to use inheritance or use Strategy design pattern. Please remember inheritance introduces coupling.
  * 2. Don't apply OCP for bug fixes
  * <p>
- * If you are using public framework and want to apply OCP, then best approach is to use Adapter design pattern.
- * <p>
  * Best practices for Changing APIs
  * 1. Do not change existing public contracts: data classes, signatures
  * 2. Expose abstractions to your customers and let them add new features on top of your framework
