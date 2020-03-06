@@ -1,5 +1,6 @@
 # Design Principles
-SOLID principles are the foundation on which we can build clean, maintainable architectures.
+1. SOLID principles are the foundation on which we can build clean, maintainable architectures.
+2. SOLID principles are more effective when they applied together.
 
 ## Code Fragility
 Fragility is the tendency of the software to break in many places every time it is changed.

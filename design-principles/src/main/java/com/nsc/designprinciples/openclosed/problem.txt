@@ -1,0 +1,70 @@
+Problem:
+Calculating tax
+
+public class TaxCalculator {
+    private final int RETIREMENT_TAX_PERCENTAGE = 10;
+    private final int INCOME_TAX_PERCENTAGE = 16;
+    private final int BASE_HEALTH_INSURANCE = 100;
+
+
+    public double calculate(Employee employee) {
+        return BASE_HEALTH_INSURANCE +
+                (employee.getMonthlyIncome() * RETIREMENT_TAX_PERCENTAGE) / 100 +
+                (employee.getMonthlyIncome() * INCOME_TAX_PERCENTAGE) / 100;
+
+    }
+}
+
+New requirement, Tax calculation based on employee type. So we tend to modify existing code like below
+public class TaxCalculator {
+    private final int RETIREMENT_TAX_PERCENTAGE = 10;
+    private final int INCOME_TAX_PERCENTAGE = 16;
+    private final int BASE_HEALTH_INSURANCE = 100;
+
+
+    public double calculate(Employee employee) {
+        int monthlyIncome = employee.getMonthlyIncome();
+
+        if (employee instance of FullTimeEmployee) {
+            // return FTE tax
+        }
+
+        if (employee instance of PartTimeEmployee) {
+            // return PTE tax
+        }
+
+        if (employee instance of Intern) {
+            if (monthlyIncome > 350) {
+                return 0;
+            } else {
+                // return Intern tax
+            }
+        }
+
+        // add more type when requirement changes
+
+        return 0;
+    }
+}
+
+/*******************************************************************************/
+Public framework
+Version 1:
+public class TaxCalculator {
+    public double calculate(Employee e) {...}
+}
+
+Version 2:
+public class TaxCalculator {
+    public double calculate(Employee e, String currency) {...}
+}
+
+How to apply open close principle? by using interface and having default implementation class in our framework
+public interface AbstractTaxCalculator {
+    public double calculate(Employee e);
+}
+
+// implemented by customer
+public class CustomerUSACalc implements AbstractTaxCalculator {
+    public double calculate(Employee e) {...}
+}
