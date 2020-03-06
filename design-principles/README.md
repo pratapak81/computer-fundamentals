@@ -45,3 +45,9 @@ The cost of prioritizing fast delivery over code quality for long periods of tim
 1. Constant Refactoring
 2. Design Patterns
 3. Unit Testing(TDD)
+
+### Pyramid of Clean Code
+* Continuous refactoring
+* TDD
+* Design patterns
+* SOLID
