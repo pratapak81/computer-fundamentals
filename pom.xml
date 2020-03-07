@@ -21,6 +21,7 @@
     <modules>
         <module>design-pattern</module>
         <module>design-principles</module>
+        <module>data-structures</module>
     </modules>
 
 </project>
