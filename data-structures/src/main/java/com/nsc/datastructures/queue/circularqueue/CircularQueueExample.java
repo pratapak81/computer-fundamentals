@@ -8,6 +8,8 @@ package com.nsc.datastructures.queue.circularqueue;
  * For circular queue
  * front = (front + 1) % length;
  * rear = (rear + 1) % length
+ * <p>
+ * https://www.javainuse.com/java/circular_java
  */
 public class CircularQueueExample {
     public static void main(String[] args) {
