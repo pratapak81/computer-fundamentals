@@ -1,4 +1,4 @@
-package com.nsc.datastructures.queue;
+package com.nsc.datastructures.queue.arrayqueue;
 
 import java.util.StringJoiner;
 
