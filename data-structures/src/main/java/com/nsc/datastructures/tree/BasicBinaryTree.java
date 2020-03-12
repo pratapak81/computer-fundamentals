@@ -1,5 +1,7 @@
 package com.nsc.datastructures.tree;
 
+import java.util.StringJoiner;
+
 /**
  * Allowing duplicates adds complexity
  *
@@ -61,13 +63,14 @@ public class BasicBinaryTree<T extends Comparable<T>> {
             // the node has both children, do a node swap to delete
             // replace current node with highest node from left side or lowest node from the ride side
             else {
-                // using lowest node from the right
+                // using lowest node from the right side
                 Node lowestNode = currentNode.getRight();
                 while (lowestNode.getLeft() != null && lowestNode.getRight() != null) {
                     lowestNode = lowestNode.getLeft();
                 }
 
                 lowestNode.getParent().setLeft(null);
+                //lowestNode.getParent().setLeft(lowestNode.getRight());
 
                 lowestNode.setLeft(currentNode.getLeft());
                 lowestNode.setRight(currentNode.getRight());
@@ -145,6 +148,48 @@ public class BasicBinaryTree<T extends Comparable<T>> {
         // if parent and child data equal then duplicate key, ignore.
         // If we want to allow duplicates best approach is to keep a counter at the node
         // and increase the counter when duplicate element found
+    }
+
+    public void print(String order) {
+        switch (order) {
+            case "PreOrder":
+                printPreOrder(root);
+                break;
+            case "PostOrder":
+                printPostOrder(root);
+                break;
+            default:
+                printInOrder(root);
+        }
+        System.out.println();
+    }
+
+    // Left, Root and Right
+    public void printInOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        printInOrder(node.left);
+        System.out.print(node.getData() + " ");
+        printInOrder(node.right);
+    }
+
+    public void printPreOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.print(node.getData() + " ");
+        printPreOrder(node.getLeft());
+        printPreOrder(node.getRight());
+    }
+
+    public void printPostOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        printPostOrder(node.left);
+        printPostOrder(node.right);
+        System.out.print(node.getData() + " ");
     }
 
     private class Node {
