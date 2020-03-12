@@ -38,7 +38,7 @@ public class BasicBinaryTreeExample {
         System.out.println("Is A exist? " + basicBinaryTree.contains("A"));
         System.out.println("Is Z exist? " + basicBinaryTree.contains("Z"));
 
-        //System.out.println("Delete F " + basicBinaryTree.delete("F"));
+        System.out.println("Delete F " + basicBinaryTree.delete("F"));
 
         System.out.println("Size is " + basicBinaryTree.size());
 
