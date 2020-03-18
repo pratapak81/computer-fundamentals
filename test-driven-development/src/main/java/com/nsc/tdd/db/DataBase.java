@@ -27,4 +27,68 @@ public class DataBase {
         }
         return instance;
     }
+
+    public User insert(User user) {
+        if (user == null) {
+            throw new NullPointerException("Object which you are trying to insert is null");
+        }
+
+        if (validateRequiredFields(user) && !isUserExist(user.getId())) {
+            userList.add(user);
+            return user;
+        }
+        throw new RuntimeException("User already exist");
+    }
+
+    public User update(User user) {
+        if (user == null) {
+            throw new NullPointerException("Object which you are trying to insert is null");
+        }
+
+        if (validateRequiredFields(user) || !isUserExist(user.getId())) {
+            throw new RuntimeException("User doesn't exist. Please insert before updating");
+        }
+        int index = findIndex(user.getId());
+        userList.set(index, user);
+        return user;
+    }
+
+    public User get(String id) {
+        int index = findIndex(id);
+        if (index > -1) {
+            return userList.get(index);
+        }
+        return null;
+    }
+
+    public boolean delete(String id) {
+        int index = findIndex(id);
+        if (index > -1) {
+            userList.remove(index);
+            return true;
+        }
+        return false;
+    }
+
+    private int findIndex(String id) {
+        int index = -1;
+        for (User user : userList) {
+            index++;
+            if (user.getId().equals(id)) {
+                break;
+            }
+        }
+        return index;
+    }
+
+    private boolean validateRequiredFields(User user) {
+        if (user.getId() == null) {
+            throw new RuntimeException("Unique identifier Id is mandatory");
+        }
+        return true;
+    }
+
+    private boolean isUserExist(String id) {
+        return userList.stream().anyMatch(user -> user.getId().equals(id));
+    }
 }
