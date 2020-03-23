@@ -5,6 +5,7 @@ import com.nsc.tdd.exception.MandatoryParametersMissingException;
 import com.nsc.tdd.exception.UserAlreadyExistException;
 import com.nsc.tdd.model.User;
 import com.nsc.tdd.repository.UserRepository;
+import com.nsc.tdd.repository.UserRepositoryImpl;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.*;
 
 // orElse @Mock will not work
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(value = {AppUtils.class, UserService.class})
+@PrepareForTest(value = {AppUtils.class, UserService.class, UserRepositoryImpl.class})
 //@RunWith(MockitoJUnitRunner.class) // use only when running Mockito
 public class UserServiceTest {
 
@@ -158,6 +159,20 @@ public class UserServiceTest {
         assertNotNull(result);
         assertEquals("222", result.getId());
         assertEquals("Pratap", result.getName());
+    }
+
+    @Test
+    public void test_get_user_count() throws Exception {
+        UserRepositoryImpl spy = PowerMockito.spy(new UserRepositoryImpl());
+        PowerMockito.when(spy, "getCount").thenReturn(15);
+
+        /*PowerMockito.doReturn(mockPoint)
+                .when(powerMockDemoSpy, "privateMethod", anyBoolean());*/
+
+        int count = spy.getUserCount();
+
+        assertEquals(15, count);
+        PowerMockito.verifyPrivate(spy, Mockito.times(1)).invoke("getCount");
     }
 
     @After

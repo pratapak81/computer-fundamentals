@@ -41,12 +41,16 @@ public class UserService {
 
     public String getApplicationName() {
         // we will use PowerMock to mock invocation to static method
-       return AppUtils.getAppName();
+        return AppUtils.getAppName();
     }
 
     public User createUser() {
         // we will use this to test PowerMock - Replacing object instantiation
         User user = new User("", "");
         return user;
+    }
+
+    public int getUserCount() {
+        return userRepository.getUserCount();
     }
 }

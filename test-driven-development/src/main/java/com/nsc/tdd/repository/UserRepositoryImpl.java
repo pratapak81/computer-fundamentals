@@ -44,4 +44,14 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean delete(String id) {
         return dataBase.delete(id);
     }
+
+    @Override
+    public int getUserCount() {
+        return getCount();
+    }
+
+    // we will use this to test mocking private methods
+    private int getCount() {
+        return 10;
+    }
 }

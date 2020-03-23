@@ -11,4 +11,6 @@ public interface UserRepository {
     User get(String id);
 
     boolean delete(String id);
+
+    int getUserCount();
 }
