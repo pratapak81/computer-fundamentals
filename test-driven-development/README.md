@@ -31,6 +31,7 @@ https://technologyconversations.com/2013/12/24/test-driven-development-tdd-best-
 ## JUnit Core Constructs
 1. Annotations
    * @Test
+   * @Ignore
 2. Verification methods
    * org.junit.Assert.*
    * HamcrestMatcherAssert

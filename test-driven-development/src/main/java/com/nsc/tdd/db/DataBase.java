@@ -28,7 +28,7 @@ public class DataBase {
         return instance;
     }
 
-    public User insert(User user) {
+    public User insert(User user) throws Exception {
         if (user == null) {
             throw new NullPointerException("Object which you are trying to insert is null");
         }
@@ -37,16 +37,16 @@ public class DataBase {
             userList.add(user);
             return user;
         }
-        throw new RuntimeException("User already exist");
+        throw new Exception("User already exist");
     }
 
-    public User update(User user) {
+    public User update(User user) throws Exception {
         if (user == null) {
             throw new NullPointerException("Object which you are trying to insert is null");
         }
 
         if (validateRequiredFields(user) || !isUserExist(user.getId())) {
-            throw new RuntimeException("User doesn't exist. Please insert before updating");
+            throw new Exception("User doesn't exist. Please insert before updating");
         }
         int index = findIndex(user.getId());
         userList.set(index, user);
@@ -81,9 +81,9 @@ public class DataBase {
         return index;
     }
 
-    private boolean validateRequiredFields(User user) {
+    private boolean validateRequiredFields(User user) throws Exception {
         if (user.getId() == null) {
-            throw new RuntimeException("Unique identifier Id is mandatory");
+            throw new Exception("Unique identifier Id is mandatory");
         }
         return true;
     }
