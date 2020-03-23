@@ -7,6 +7,8 @@ import com.nsc.tdd.repository.UserRepository;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -50,6 +52,11 @@ public class UserServiceTest {
         //Mockito.verify(userRepositoryMock, atMost(1)).insert(user);
         //Mockito.verify(userRepositoryMock, never()).insert(user);
 
+        // if we want verify order of the calling, userRepo first and then another service
+        //InOrder inOrder = Mockito.inOrder(userRepositoryMock, otherMock);
+        //inOrder.verify(userRepositoryMock).insert(user);
+        //inOrder.verify(otherMock).methodName(parameter);
+
         assertNotNull(result);
         assertEquals(user.getId(), result.getId());
         assertEquals(user.getName(), result.getName());
@@ -89,6 +96,27 @@ public class UserServiceTest {
         expectedException.expectMessage("Unable to add User. Please try again later");
 
         userService.add(user);
+    }
+
+    @Test
+    public void test_add_user_argument_captor() throws Exception {
+
+        when(userRepositoryMock.insert(Mockito.any(User.class))).thenReturn(new User("Id", "Name"));
+
+        User result = userService.add("222", "Pratap");
+
+        assertNotNull(result);
+        assertEquals("Id", result.getId());
+        assertEquals("Name", result.getName());
+
+        ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
+        Mockito.verify(userRepositoryMock, times(1)).insert(userArgumentCaptor.capture());
+
+        User capturedUser = userArgumentCaptor.getValue();
+
+        assertNotNull(capturedUser);
+        assertEquals("222", capturedUser.getId());
+        assertEquals("Pratap", capturedUser.getName());
     }
 
     @After

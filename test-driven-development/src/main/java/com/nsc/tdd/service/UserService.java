@@ -30,4 +30,11 @@ public class UserService {
         }
         throw new Exception("Unable to add User. Please try again later");
     }
+
+    public User add(String userId, String userName) throws Exception {
+        // Argument Captor, we will capture and verify in test class
+        User user = new User(userId, userName);
+        User userResult = userRepository.insert(user);
+        return userResult;
+    }
 }
