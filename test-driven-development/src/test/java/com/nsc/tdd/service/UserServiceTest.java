@@ -1,5 +1,6 @@
 package com.nsc.tdd.service;
 
+import com.nsc.tdd.AppUtils;
 import com.nsc.tdd.exception.MandatoryParametersMissingException;
 import com.nsc.tdd.exception.UserAlreadyExistException;
 import com.nsc.tdd.model.User;
@@ -12,6 +13,8 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -20,6 +23,7 @@ import static org.mockito.Mockito.*;
 
 // orElse @Mock will not work
 @RunWith(PowerMockRunner.class)
+@PrepareForTest(value = {AppUtils.class})
 //@RunWith(MockitoJUnitRunner.class) // use only when running Mockito
 public class UserServiceTest {
 
@@ -122,6 +126,26 @@ public class UserServiceTest {
         assertNotNull(capturedUser);
         assertEquals("222", capturedUser.getId());
         assertEquals("Pratap", capturedUser.getName());
+    }
+
+    @Test
+    public void test_get_application_name() {
+        // static mocking
+        PowerMockito.mockStatic(AppUtils.class);
+        PowerMockito.when(AppUtils.getAppName()).thenReturn("Test Driven Development");
+
+        String result = userService.getApplicationName();
+
+        PowerMockito.verifyStatic(AppUtils.class);
+        /**
+         * without this
+         * org.mockito.exceptions.misusing.UnfinishedVerificationException:
+         * Missing method call for verify(mock) here:
+         */
+        AppUtils.getAppName();
+
+        assertNotNull(result);
+        assertEquals("Test Driven Development", result);
     }
 
     @After

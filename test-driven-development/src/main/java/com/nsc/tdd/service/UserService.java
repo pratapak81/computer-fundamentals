@@ -1,5 +1,6 @@
 package com.nsc.tdd.service;
 
+import com.nsc.tdd.AppUtils;
 import com.nsc.tdd.exception.MandatoryParametersMissingException;
 import com.nsc.tdd.model.User;
 import com.nsc.tdd.repository.UserRepository;
@@ -36,5 +37,10 @@ public class UserService {
         User user = new User(userId, userName);
         User userResult = userRepository.insert(user);
         return userResult;
+    }
+
+    public String getApplicationName() {
+        // we will use PowerMock to mock invocation to static method
+       return AppUtils.getAppName();
     }
 }
