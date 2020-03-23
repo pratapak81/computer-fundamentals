@@ -14,7 +14,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User add(User user) {
+    public User add(User user) throws Exception {
 
         Optional<User> userOptional = Optional.ofNullable(user);
         userOptional.orElseThrow(() -> new MandatoryParametersMissingException("User can't be null"));
@@ -28,6 +28,6 @@ public class UserService {
             User createdUser = new User(user1.getId(), user1.getName());
             return createdUser;
         }
-        return null;
+        throw new Exception("Unable to add User. Please try again later");
     }
 }

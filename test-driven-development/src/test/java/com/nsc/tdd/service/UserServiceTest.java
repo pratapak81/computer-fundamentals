@@ -33,7 +33,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void test_add_success() {
+    public void test_add_success() throws Exception {
         User user = new User("123", "Pratap");
 
         when(userRepositoryMock.insert(user)).thenReturn(new User("123", "Pratap"));
@@ -57,21 +57,42 @@ public class UserServiceTest {
 
     //@Test(expected = MandatoryParametersMissingException.class)
     @Test
-    public void test_add_input_null() {
+    public void test_add_input_null() throws Exception {
         expectedException.expect(MandatoryParametersMissingException.class);
         expectedException.expectMessage("User can't be null");
         userService.add(null);
     }
 
-    @Test(expected = UserAlreadyExistException.class)
-    @Ignore
-    public void test_add_existing_user() {
+    @Test
+    public void test_add_existing_user() throws Exception {
         User user = new User("123", "Pratap");
 
+        when(userRepositoryMock.insert(user)).thenReturn(new User("123", "Pratap")).thenThrow(new UserAlreadyExistException("User already exist"));
+
+        expectedException.expect(UserAlreadyExistException.class);
+        expectedException.expectMessage("User already exist");
+
+        userService.add(user);
+        userService.add(user);
+
+        Mockito.verify(userRepositoryMock, times(2)).insert(user);
+    }
+
+    @Test
+    public void test_add_unable_to_insert() throws Exception {
+        User user = new User("222", "Name"); // consider this can't be inserted
+        when(userRepositoryMock.insert(user)).thenReturn(null);
+
+        Mockito.verify(userRepositoryMock, atMostOnce()).insert(user);
+
+        expectedException.expect(Exception.class);
+        expectedException.expectMessage("Unable to add User. Please try again later");
+
+        userService.add(user);
     }
 
     @After
     public void tearDown() {
-
+        userService = null;
     }
 }
