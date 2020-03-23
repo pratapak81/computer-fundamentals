@@ -12,13 +12,15 @@ import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 // orElse @Mock will not work
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
+//@RunWith(MockitoJUnitRunner.class) // use only when running Mockito
 public class UserServiceTest {
 
     private UserService userService;
@@ -90,12 +92,15 @@ public class UserServiceTest {
         User user = new User("222", "Name"); // consider this can't be inserted
         when(userRepositoryMock.insert(user)).thenReturn(null);
 
-        Mockito.verify(userRepositoryMock, atMostOnce()).insert(user);
+        //Mockito.verify(userRepositoryMock, times(1)).insert(user);
+        //Mockito.verify(userRepositoryMock, atMostOnce()).insert(user);
 
         expectedException.expect(Exception.class);
         expectedException.expectMessage("Unable to add User. Please try again later");
 
         userService.add(user);
+
+        Mockito.verify(userRepositoryMock, times(1)).insert(user);
     }
 
     @Test

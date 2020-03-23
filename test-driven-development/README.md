@@ -38,4 +38,19 @@ https://technologyconversations.com/2013/12/24/test-driven-development-tdd-best-
 3. @Before/@BeforeClass
 4. @After/@AfterClass
 
+## Mock vs Spy
+Mock object replace mocked class entirely, returning recorded or default values. You can create mock out of "thin air". This is what is mostly used during unit testing
+
+When spying, you take an existing object and "replace" only some methods. This is useful when you have a huge class and only want to mock certain methods (partial mocking). 
+Unless we stub, spy always calls real method
+
+1. Using mocking we can't
+   * mock final methods
+   * mock static methods
+   
+## PowerMock
+1. Mockito covers 80% of usage scenarios. PowerMock provides an extension
+for the remaining 20%
+2. Mockito uses a proxy based approach to intercept calls
+3. PowerMock uses a custom class loader and manipulates the byte code
 
