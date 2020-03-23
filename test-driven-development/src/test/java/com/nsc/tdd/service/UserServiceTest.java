@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 
 // orElse @Mock will not work
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(value = {AppUtils.class})
+@PrepareForTest(value = {AppUtils.class, UserService.class})
 //@RunWith(MockitoJUnitRunner.class) // use only when running Mockito
 public class UserServiceTest {
 
@@ -146,6 +146,18 @@ public class UserServiceTest {
 
         assertNotNull(result);
         assertEquals("Test Driven Development", result);
+    }
+
+    @Test
+    public void test_create_user() throws Exception {
+        User user = new User("222", "Pratap");
+        PowerMockito.whenNew(User.class).withAnyArguments().thenReturn(user);
+
+        User result = userService.createUser();
+
+        assertNotNull(result);
+        assertEquals("222", result.getId());
+        assertEquals("Pratap", result.getName());
     }
 
     @After
