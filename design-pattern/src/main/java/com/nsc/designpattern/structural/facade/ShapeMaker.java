@@ -19,9 +19,9 @@ package com.nsc.designpattern.structural.facade;
  * It hides all the complexities of the building and displays a friendly face
  */
 public class ShapeMaker {
-    private Shape circle;
-    private Shape rectangle;
-    private Shape square;
+    private final Shape circle;
+    private final Shape rectangle;
+    private final Shape square;
 
     public ShapeMaker() {
         circle = new Circle();

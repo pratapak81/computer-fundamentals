@@ -1,10 +1,10 @@
 package com.nsc.designpattern.structural.adapter;
 
 public class EmployeeKannada {
-    private String ekamaatra;
-    private String modalaneHesaru;
-    private String koneyaHesaru;
-    private String tapalu;
+    private final String ekamaatra;
+    private final String modalaneHesaru;
+    private final String koneyaHesaru;
+    private final String tapalu;
 
     public EmployeeKannada(String ekamaatra, String modalaneHesaru, String koneyaHesaru, String tapalu) {
         this.ekamaatra = ekamaatra;

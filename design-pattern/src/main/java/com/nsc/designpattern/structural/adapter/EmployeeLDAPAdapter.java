@@ -11,7 +11,7 @@ package com.nsc.designpattern.structural.adapter;
  */
 public class EmployeeLDAPAdapter implements Employee {
 
-    private EmployeeLDAP employeeLDAP;
+    private final EmployeeLDAP employeeLDAP;
 
     public EmployeeLDAPAdapter(EmployeeLDAP employeeLDAP) {
         this.employeeLDAP = employeeLDAP;

@@ -21,23 +21,21 @@ import java.util.HashMap;
  */
 public class PlayerFactory {
 
-    private static HashMap<String, Player> playerHashMap = new HashMap<>();
+    private static final HashMap<String, Player> playerHashMap = new HashMap<>();
+
+    private PlayerFactory() {}
 
     public static Player getPlayer(String type) {
         Player player = null;
         if (playerHashMap.containsKey(type)) {
             player = playerHashMap.get(type);
-        } else {
-            switch (type) {
-                case "Terrorist":
-                    player = new Terrorist();
-                    break;
-                case "CounterTerrorist":
-                    player = new CounterTerrorist();
-            }
-            if (player != null) {
-                playerHashMap.put(type, player);
-            }
+        } else if("Terrorist".equals(type)){
+            player = new Terrorist();
+        } else if("CounterTerrorist".equals(type)) {
+            player = new CounterTerrorist();
+        }
+        if (player != null) {
+            playerHashMap.put(type, player);
         }
         return player;
     }

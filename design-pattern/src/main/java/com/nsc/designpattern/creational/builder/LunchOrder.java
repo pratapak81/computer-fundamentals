@@ -7,10 +7,10 @@ package com.nsc.designpattern.creational.builder;
  * Eg: StringBuilder, DocumentBuilder, Locale.Builder
  */
 public class LunchOrder {
-    private String bread;
-    private String condiments;
-    private String dressing;
-    private String meat;
+    private final String bread;
+    private final String condiments;
+    private final String dressing;
+    private final String meat;
 
     public static Builder builder() {
         return new Builder();

@@ -2,7 +2,7 @@ package com.nsc.designpattern.structural.adapter;
 
 public class EmployeeKannadaAdapter implements Employee {
 
-    private EmployeeKannada employeeKannada;
+    private final EmployeeKannada employeeKannada;
 
     public EmployeeKannadaAdapter(EmployeeKannada employeeKannada) {
         this.employeeKannada = employeeKannada;

@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class ProxyInternet implements Internet {
 
-    private Internet realInternet = new RealInternet();
-    private static List<String> bannedSites = new ArrayList<>();
+    private final Internet realInternet = new RealInternet();
+    private static final List<String> bannedSites = new ArrayList<>();
 
     static {
         bannedSites.add("abc.com");

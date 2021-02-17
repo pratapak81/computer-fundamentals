@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class CompanyDirectory implements Employee {
 
-    private List<Employee> employeeList = new ArrayList<>();
+    private final List<Employee> employeeList = new ArrayList<>();
 
     @Override
     public void showEmployeeDetails() {

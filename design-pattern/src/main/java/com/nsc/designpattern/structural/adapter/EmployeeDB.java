@@ -2,13 +2,13 @@ package com.nsc.designpattern.structural.adapter;
 
 public class EmployeeDB implements Employee {
 
-    private String Id;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private final String id;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
 
     public EmployeeDB(String Id, String firstName, String lastName, String email) {
-        this.Id = Id;
+        this.id = Id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -16,7 +16,7 @@ public class EmployeeDB implements Employee {
 
     @Override
     public String getId() {
-        return Id;
+        return id;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class EmployeeDB implements Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "Id='" + Id + '\'' +
+                "Id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

@@ -6,7 +6,7 @@ package com.nsc.designpattern.structural.composite;
  */
 public class Manager implements Employee {
 
-    private String name;
+    private final String name;
 
     public Manager(String name) {
         this.name = name;

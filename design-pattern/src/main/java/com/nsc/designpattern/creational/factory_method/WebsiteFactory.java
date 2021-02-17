@@ -11,6 +11,8 @@ package com.nsc.designpattern.creational.factory_method;
  */
 public class WebsiteFactory {
 
+    private WebsiteFactory(){}
+
     public static Website getWebsite(WebsiteType siteType) {
         switch (siteType) {
             case BLOG:

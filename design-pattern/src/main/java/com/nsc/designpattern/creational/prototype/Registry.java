@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Registry {
 
-    private Map<String, Item> itemMap = new HashMap<String, Item>();
+    private final Map<String, Item> itemMap = new HashMap<>();
 
     public Registry() {
         loadItems();

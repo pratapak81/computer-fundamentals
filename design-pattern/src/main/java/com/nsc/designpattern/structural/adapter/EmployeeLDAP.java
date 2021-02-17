@@ -1,10 +1,10 @@
 package com.nsc.designpattern.structural.adapter;
 
 public class EmployeeLDAP {
-    private String cn;
-    private String surname;
-    private String givenName;
-    private String mail;
+    private final String cn;
+    private final String surname;
+    private final String givenName;
+    private final String mail;
 
     public EmployeeLDAP(String cn, String surname, String givenName, String mail) {
         this.cn = cn;

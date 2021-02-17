@@ -7,9 +7,9 @@ import java.util.Random;
  */
 public class FlyweightDemo {
 
-    private static String[] playerType =
+    private static final String[] playerType =
             {"Terrorist", "CounterTerrorist"};
-    private static String[] weapons =
+    private static final String[] weapons =
             {"AK-47", "Maverick", "Gut Knife", "Desert Eagle"};
 
     public static void main(String[] args) {
